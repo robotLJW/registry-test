@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nacos-deployment
+  labels:
+    app: nacos
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      containers:
+        - name: nacos
+          # image 地址得修改
+          image: xxxxxx-xxxx-nacos:latest
+          imagePullPolicy: IfNotPresent
+          command: ['sh','-c','sh /home/start.sh']
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+            limits:
+              memory: "1000Mi"
+              cpu: "1000m"
